@@ -8,6 +8,8 @@ public enum UserRoleEnum {
 
     ADMIN,
 
-    TESTER
+    TESTER,
+
+    VIP
 
 }

@@ -16,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Log4j2
 
@@ -84,6 +86,11 @@ public class UserServiceImpl implements UserService {
         log.info("this is user info: " + user);
         userRoleRepository.save(new UserRole(user.getUserId(), role.getRoleId()));
 
+    }
+
+    @Override
+    public Optional<User> findUserByName(String username) {
+        return userRepository.findByUserName(username);
     }
 
     private void checkUserRegisterInfo(UserRegisterRequest userRegisterRequest) {

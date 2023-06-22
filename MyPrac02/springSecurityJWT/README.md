@@ -4,6 +4,36 @@
 - add Customers, Suppliers, Admin register method
 
 
+**com.rbacAuth.springSecurityJWT.service**
+
+```
+
+        // 1.1 get UserRole by userId
+        long userId = user.getUserId();
+        List<UserRole> userRoles = userRoleRepository.findByUserId(userId);
+
+        // 1.2 get RoleId list from UserRole
+        List<Long> roles = userRoles.stream()
+                .map(UserRole::getRoleId)
+                .collect(Collectors.toList());
+        log.info("roleId Table: " + roles.get(0) + ", " + roles.get(1));
+
+        // 1.3 get roleName list from Role
+        List<String> roleName = roles.stream()
+                .map(role -> roleRepository.findById(role).get().getRoleName())
+                .collect(Collectors.toList());
+
+        log.info("roleName Table: " + roleName);
+
+        // 1.4 = 1.2 + 1.3 get Role_Name from UsreRole and Role tables
+        List<String> roleNames = userRoles.stream()
+                .map(UserRole::getRoleId)
+                .map(role -> roleRepository.findById(role).get().getRoleName())
+                .collect(Collectors.toList());
+        log.info("roleNames List: " + roleNames);
+
+```
+
 ## V1 Realized
 
 - Realize the basic Authorization process to system new users.

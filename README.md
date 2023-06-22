@@ -21,7 +21,11 @@
 [4] Delivering a CIAM Project - An Auth0 Planning Guide to Customer Identity & Access Management. https://cdn2.auth0.com/docs/media/articles/architecture-scenarios/planning/B2C-Project-Planning.pdf?_gl=1*18rmt4z*_gcl_au*NjE3MjAyNTE5LjE2ODQ2NDc3OTU.*rollup_ga*NzQ0OTE4MDQ1LjE2ODQ2NDc3OTU.*rollup_ga_F1G3E656YZ*MTY4NzQ0NzY4My4xMy4xLjE2ODc0NDc3ODEuNDQuMC4w&_ga=2.79192274.736234882.1687416743-744918045.1684647795
 
 
-## project
+## Demo Project
 [1] https://github.com/AnoyiX/spring-security-demos
 
 [2] https://github.com/Snailclimb/spring-security-jwt-guide
+
+[3] https://github.com/ali-bouali/spring-boot-3-jwt-security
+
+[4] https://github.com/shabbirdwd53/spring-security-tutorial/tree/main
