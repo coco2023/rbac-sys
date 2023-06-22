@@ -34,6 +34,9 @@ public class AuthService {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     public String createToken(LoginRequest loginRequest) {
 
         // find usr by userName
@@ -52,32 +55,14 @@ public class AuthService {
         }
 
         /**
-         * V1: get RoleName throw userId, between UserRole Table, RoleTable; return as List
-         * get user authority from userRole Table based on the userId
+         * V2: get RoleName throw userId, between UserRole Table, RoleTable; return as List
          */
-        // 1.1 get UserRole by userId
-        long userId = user.getUserId();
-        List<UserRole> userRoles = userRoleRepository.findByUserId(userId);
-
-//        // 1.2 get RoleId list from UserRole
-//        List<Long> roles = userRoles.stream()
-//                .map(UserRole::getRoleId)
-//                .collect(Collectors.toList());
-//        log.info("roleId Table: " + roles.get(0) + ", " + roles.get(1));
-//
-//        // 1.3 get roleName list from Role
-//        List<String> roleName = roles.stream()
-//                .map(role -> roleRepository.findById(role).get().getRoleName())
-//                .collect(Collectors.toList());
-//
-//        log.info("roleName Table: " + roleName);
-
-        // 1.4 = 1.2 + 1.3 get Role_Name from UsreRole and Role tables
-        List<String> roleNames = userRoles.stream()
+        List<String> roleNames = userRoleRepository.findByUserId(user.getUserId())
+                .stream()
                 .map(UserRole::getRoleId)
                 .map(role -> roleRepository.findById(role).get().getRoleName())
                 .collect(Collectors.toList());
-        log.info("roleNames List: " + roleNames);
+        log.info("UserRole Table: " + roleNames);
 
         // create JWT Token
         String token = JwtTokenUtils.createToken(
@@ -86,8 +71,11 @@ public class AuthService {
                 roleNames,
                 loginRequest.getRememberMe()
         );
+        log.info("This is JWT token:" + token);
 
-        log.info("!This is token:" + token);
+//        // using Redis to store temporary data
+//        stringRedisTemplate.opsForValue().set(user.getId().toString(), token);
+
 
         return token;
     }

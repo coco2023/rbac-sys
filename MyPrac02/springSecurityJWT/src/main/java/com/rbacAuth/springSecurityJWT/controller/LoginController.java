@@ -26,7 +26,6 @@ public class LoginController {
     public ResponseEntity<Void> normalLogin(@RequestBody LoginRequest loginRequest) {
 
         String token = authService.createToken(loginRequest);
-        log.info("this is login token: " + token);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set(SecurityConstants.TOKEN_HEADER, token);
