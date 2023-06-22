@@ -1,5 +1,9 @@
 # Simple Demo for RBAC-Spring Security system
 
+## V2 
+- add Customers, Suppliers, Admin register method
+
+
 ## V1 Realized
 
 - Realize the basic Authorization process to system new users.

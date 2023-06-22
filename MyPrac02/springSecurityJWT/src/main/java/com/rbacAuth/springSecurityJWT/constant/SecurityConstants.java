@@ -5,7 +5,10 @@ public class SecurityConstants {
     // System WHITELIST
     public static final String[] SYSTEM_WHITELIST = {
         "/api/users/login",
-        "/api/users/register"
+        "/api/users/register",
+        "/api/customers/register",
+        "/api/suppliers/register",
+        "/api/admin/register"
     };
 
     // JWT token defaults

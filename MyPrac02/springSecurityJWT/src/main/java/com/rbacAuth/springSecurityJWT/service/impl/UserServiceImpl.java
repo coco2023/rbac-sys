@@ -1,5 +1,6 @@
 package com.rbacAuth.springSecurityJWT.service.impl;
 
+import com.rbacAuth.springSecurityJWT.constant.UserRoleEnum;
 import com.rbacAuth.springSecurityJWT.dto.UserRegisterRequest;
 import com.rbacAuth.springSecurityJWT.dto.UserRepresentation;
 import com.rbacAuth.springSecurityJWT.entity.Role;
@@ -13,7 +14,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 //    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public void save(UserRegisterRequest userRegisterRequest) {
+    public void saveNormalUser(UserRegisterRequest userRegisterRequest) {
         checkUserRegisterInfo(userRegisterRequest);
 
         // encode password & save user info
@@ -53,8 +53,8 @@ public class UserServiceImpl implements UserService {
                 );
 
         log.info("this is user info: " + user);
-        userRoleRepository.save(new UserRole(user.getUserId(), role_normalUser.getRoleId()));
-        userRoleRepository.save(new UserRole(user.getUserId(), role_manager.getRoleId()));
+        userRoleRepository.save(new com.rbacAuth.springSecurityJWT.entity.UserRole(user.getUserId(), role_normalUser.getRoleId()));
+        userRoleRepository.save(new com.rbacAuth.springSecurityJWT.entity.UserRole(user.getUserId(), role_manager.getRoleId()));
 
     }
 
@@ -62,6 +62,28 @@ public class UserServiceImpl implements UserService {
     public Page<UserRepresentation> getAll(int pageNum, int pageSize) {
         return userRepository.findAll(PageRequest.of(pageNum, pageSize))
                 .map(User::toUserRepresentation);
+    }
+
+    @Override
+    public void save(UserRegisterRequest userRegisterRequest, UserRoleEnum userRoleEnum) {
+
+        checkUserRegisterInfo(userRegisterRequest);
+
+        // encode password & save user info
+        User user = userRegisterRequest.toUser();
+//        user.setPassword(bCryptPasswordEncoder.encode(userRegisterRequest.getPassword()));
+        user.setPassword(userRegisterRequest.getPassword());
+        userRepository.save(user);
+
+        // set ROLE to user: USER
+        Role role = (Role) roleRepository.findByRoleName(String.valueOf(userRoleEnum))
+                .orElseThrow(
+                        () -> new RuntimeException("USER_ROLE_NOT_FOUND!")
+                );
+
+        log.info("this is user info: " + user);
+        userRoleRepository.save(new UserRole(user.getUserId(), role.getRoleId()));
+
     }
 
     private void checkUserRegisterInfo(UserRegisterRequest userRegisterRequest) {
