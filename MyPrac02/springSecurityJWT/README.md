@@ -2,6 +2,8 @@
 
 ## V2 
 - add Customers, Suppliers, Admin register method
+- add user login method
+- add role authority when user login
 
 
 **com.rbacAuth.springSecurityJWT.service**
