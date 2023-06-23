@@ -43,13 +43,13 @@ public class RegisterController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
-//    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public ResponseEntity<Page<UserRepresentation>> getAllUser(
-            @RequestParam(value = "pageNum", defaultValue = "0") int pageNum,
-            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
-    ) {
-        Page<UserRepresentation> allUser = userService.getAll(pageNum, pageSize);
-        return ResponseEntity.ok().body(allUser);
-    }
+//    @GetMapping
+////    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+//    public ResponseEntity<Page<UserRepresentation>> getAllUser(
+//            @RequestParam(value = "pageNum", defaultValue = "0") int pageNum,
+//            @RequestParam(value = "pageSize", defaultValue = "10") int pageSize
+//    ) {
+//        Page<UserRepresentation> allUser = userService.getAll(pageNum, pageSize);
+//        return ResponseEntity.ok().body(allUser);
+//    }
 }

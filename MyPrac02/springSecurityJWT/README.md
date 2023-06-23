@@ -1,5 +1,11 @@
 # Simple Demo for RBAC-Spring Security system
 
+## V4
+
+encounter 401 ERROR in redirect Auth parts, add userRole column to User DB
+
+https://www.codejava.net/frameworks/spring-boot/spring-boot-security-role-based-authorization-tutorial 
+
 ## V3 
 - add logout function
 

@@ -16,7 +16,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -61,9 +63,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<UserRepresentation> getAll(int pageNum, int pageSize) {
-        return userRepository.findAll(PageRequest.of(pageNum, pageSize))
-                .map(User::toUserRepresentation);
+    public List<UserRepresentation> getAll() {
+        return userRepository.findAll().stream()
+                .map(User::toUserRepresentation)
+                .collect(Collectors.toList());
     }
 
     @Override

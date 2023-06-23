@@ -6,12 +6,13 @@ import com.rbacAuth.springSecurityJWT.dto.UserRepresentation;
 import com.rbacAuth.springSecurityJWT.entity.User;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
     void saveNormalUser(UserRegisterRequest userRegisterRequest);
 
-    Page<UserRepresentation> getAll(int pageNum, int pageSize);
+    List<UserRepresentation> getAll();
 
     void save(UserRegisterRequest userRegisterRequest, UserRoleEnum userRole);
 
