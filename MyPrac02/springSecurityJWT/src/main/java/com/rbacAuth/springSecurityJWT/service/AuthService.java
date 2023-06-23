@@ -67,26 +67,60 @@ public class AuthService {
                 .collect(Collectors.toList());
         log.info("UserRole Table: " + roleNames);
 
-        // add roleNames to authority
-        List<String> authorities = roleNames.stream()
+        /**
+         *  add roleNames to authority
+         *  split into 2 parts for redirect__UserPage
+          */
+        // set authorities to roleNames - GrantedAuthority
+        List<GrantedAuthority> setAuthorities = roleNames.stream()
                 .map(roleName -> new SimpleGrantedAuthority(roleName))
+                .collect(Collectors.toList());
+        log.info("setAuthorities Table: " + setAuthorities);
+
+        // convert GrantedAuthority into String type
+        List<String> getAuthorities = setAuthorities.stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-        log.info("authorities Table: " + authorities);
+        log.info("getAuthorities Table: " + getAuthorities);
 
-        // create JWT Token
+        /**
+         * create JWT Token
+         */
         String token = JwtTokenUtils.createToken(
                 user.getUserName(),
                 String.valueOf(user.getUserId()),
-                authorities,
+                getAuthorities,
                 loginRequest.getRememberMe()
         );
         log.info("This is JWT token:" + token);
 
-//        // using Redis to store temporary data
+        /**
+         * using Redis to store temporary data
+         */
         stringRedisTemplate.opsForValue().set(String.valueOf(user.getUserId()), token);
 
-        return token;
+        /**
+         *  redirect different users based on their role
+         */
+        String redirectUrl;
+        if (setAuthorities.contains(new SimpleGrantedAuthority("USER"))) {
+            redirectUrl = "user_dashboard.html";
+        }
+        else if (setAuthorities.contains(new SimpleGrantedAuthority("ADMIN"))) {
+            redirectUrl = "admin_dashboard.html";
+        }
+        else if (setAuthorities.contains(new SimpleGrantedAuthority("SUPPLIER"))) {
+            redirectUrl = "supplier_dashboard.html";
+        }
+        else if (setAuthorities.contains(new SimpleGrantedAuthority("CUSTOMER"))) {
+            redirectUrl = "customer_dashboard.html";
+        }
+        else {
+            redirectUrl = "dashboard.html";
+        }
+        log.info("redirectUrl: " + redirectUrl);
+
+        return token + "," + redirectUrl;
     }
 
     public void removeToken() {

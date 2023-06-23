@@ -5,7 +5,6 @@ import com.rbacAuth.springSecurityJWT.exception.JwtAccessDeniedHandler;
 import com.rbacAuth.springSecurityJWT.exception.JwtAuthenticationEntryPoint;
 import com.rbacAuth.springSecurityJWT.filter.JwtAuthorizationFilter;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -13,9 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
@@ -43,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .anyRequest().permitAll()   // auth all url
                 // permit the white list's ports
                 .antMatchers(HttpMethod.POST, SecurityConstants.SYSTEM_WHITELIST).permitAll()
+//                .antMatchers("user_dashboard").hasAuthority("USER")
                 // other ports need auth
                 .anyRequest().authenticated()
 
