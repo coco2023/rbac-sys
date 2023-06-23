@@ -33,4 +33,13 @@ public class LoginController {
         return new ResponseEntity<>(httpHeaders, HttpStatus.OK);
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout() {
+        authService.removeToken();
+        log.info("Logout Success!");
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }

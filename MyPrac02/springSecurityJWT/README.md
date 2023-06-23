@@ -1,5 +1,32 @@
 # Simple Demo for RBAC-Spring Security system
 
+## V3 
+- add logout function
+
+### Testing
+
+1. login
+
+> localhost:9334/api/users/login
+> {
+"userName": "customer9",
+"password": "12345",
+> // "telephone": "1234567"
+"rememberMe": true
+> }
+
+2. logout
+localhost:9334/api/users/logout
+> **!!!IMPORTANT!!!**   
+>       
+>    Add {'Key': 'Authorization', 'Value': 'from previous login Authorization header'}
+>         
+> to the **Headers** of **Logout POST request**
+
+
+```
+
+
 ## V2 
 - add Customers, Suppliers, Admin register method
 - add user login method

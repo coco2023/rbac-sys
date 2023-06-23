@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -14,6 +15,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+@Log4j2
 
 public class JwtTokenUtils {
 
@@ -34,11 +37,19 @@ public class JwtTokenUtils {
                 .setSubject(username)
                 .setExpiration(expirationDate)
                 .compact();
-        return SecurityConstants.TOKEN_PREFIX + tokenPrefix; // 添加 token 前缀 "Bearer ";
+
+        // add token Prefix "authSys" #"Bearer ";
+        String securityToken = SecurityConstants.TOKEN_PREFIX + tokenPrefix;
+        log.info("JwtTokenUtils.securityToken: " + securityToken);
+
+        return securityToken;
     }
 
     public static String getId(String token) {
         Claims claims = getClaims(token);
+
+        log.info(claims + ", getId: " + claims.getId());
+
         return claims.getId();
     }
 
@@ -46,22 +57,34 @@ public class JwtTokenUtils {
         Claims claims = getClaims(token);
         List<SimpleGrantedAuthority> authorities = getAuthorities(claims);
         String userName = claims.getSubject();
-        return new UsernamePasswordAuthenticationToken(userName, token, authorities);
+
+        UsernamePasswordAuthenticationToken upAuth = new UsernamePasswordAuthenticationToken(userName, token, authorities);
+        log.info("userPassAuth: " + upAuth);
+
+        return upAuth;
     }
 
     private static Claims getClaims(String token) {
 
-        return Jwts.parser()
+        Claims claims = Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
+        log.info("getClaims: "  + claims);
+
+        return claims;
     }
 
     private static List<SimpleGrantedAuthority> getAuthorities(Claims claims) {
         String role = (String) claims.get(SecurityConstants.ROLE_CLAIMS);
-        return Arrays.stream(role.split(","))
+
+        List<SimpleGrantedAuthority> authorities = Arrays.stream(role.split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
+
+        log.info("getAuthorities: " + authorities);
+
+        return authorities;
     }
 
 

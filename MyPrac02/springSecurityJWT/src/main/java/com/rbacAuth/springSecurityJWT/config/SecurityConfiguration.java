@@ -13,8 +13,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
+
+import static java.util.Collections.singletonList;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @EnableWebSecurity
@@ -24,6 +29,10 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private StringRedisTemplate stringRedisTemplate;
+
+    public SecurityConfiguration(StringRedisTemplate stringRedisTemplate) {
+        this.stringRedisTemplate = stringRedisTemplate;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -35,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // permit the white list's ports
                 .antMatchers(HttpMethod.POST, SecurityConstants.SYSTEM_WHITELIST).permitAll()
                 // other ports need auth
-//                .anyRequest().authenticated()
+                .anyRequest().authenticated()
 
                 .and()
                 // add user-defined filter
@@ -53,5 +62,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // avoid block of H2 webpage Frame
         http.headers().frameOptions().disable();
     }
-    
 }

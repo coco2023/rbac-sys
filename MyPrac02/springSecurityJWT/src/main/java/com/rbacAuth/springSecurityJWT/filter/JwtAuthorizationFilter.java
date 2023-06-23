@@ -9,7 +9,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -45,12 +44,15 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
         String tokenValue = token.replace(SecurityConstants.TOKEN_PREFIX, "");
         UsernamePasswordAuthenticationToken authentication = null;
+        log.info("tokenValue: " + tokenValue);
 
         try {
             String previousToken = stringRedisTemplate.opsForValue().get(JwtTokenUtils.getId(tokenValue));
+            log.info("previousToken: " + previousToken);
             if (!token.equals(previousToken)) {
                 SecurityContextHolder.clearContext();
                 chain.doFilter(request, response);
+                log.info("chain: " + chain);
                 return;
             }
             authentication = JwtTokenUtils.getAuthentication(tokenValue);
