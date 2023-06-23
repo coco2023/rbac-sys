@@ -83,13 +83,19 @@ public class AuthService {
                 .collect(Collectors.toList());
         log.info("getAuthorities Table: " + getAuthorities);
 
+        // get authority from Jwt
+//        List<String> jwtAuthorities = jwtUser.getAuthorities()
+//                .stream()
+//                .map(GrantedAuthority::getAuthority)
+//                .collect(Collectors.toList());
+
         /**
          * create JWT Token
          */
         String token = JwtTokenUtils.createToken(
                 user.getUserName(),
                 String.valueOf(user.getUserId()),
-                getAuthorities,
+                getAuthorities,                         // authority of the current user / jwtAuthorities
                 loginRequest.getRememberMe()
         );
         log.info("This is JWT token:" + token);

@@ -2,6 +2,9 @@ package com.rbacAuth.springSecurityJWT.dto;
 
 import com.rbacAuth.springSecurityJWT.entity.User;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
 
 @Data
 @NoArgsConstructor

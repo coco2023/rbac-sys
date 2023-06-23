@@ -64,9 +64,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserRepresentation> getAll() {
-        return userRepository.findAll().stream()
+        List<UserRepresentation> users = userRepository.findAll().stream()
                 .map(User::toUserRepresentation)
                 .collect(Collectors.toList());
+        log.info("Success!");
+        return users;
     }
 
     @Override
@@ -80,14 +82,17 @@ public class UserServiceImpl implements UserService {
         user.setPassword(userRegisterRequest.getPassword());
         userRepository.save(user);
 
+        log.info("this is new registered user: " + user);
+
         // set ROLE to user: USER
         Role role = (Role) roleRepository.findByRoleName(String.valueOf(userRoleEnum))
                 .orElseThrow(
                         () -> new RuntimeException("USER_ROLE_NOT_FOUND!")
                 );
 
-        log.info("this is user info: " + user);
+        log.info("this is role info: " + role);
         userRoleRepository.save(new UserRole(user.getUserId(), role.getRoleId()));
+//        userRoleRepository.save(new UserRole(user.getUserId(), role.getRoleId(), user, role));
 
     }
 

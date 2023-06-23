@@ -2,6 +2,7 @@ package com.rbacAuth.springSecurityJWT.controller;
 
 import com.rbacAuth.springSecurityJWT.dto.UserRepresentation;
 import com.rbacAuth.springSecurityJWT.service.UserService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@Log4j2
 
 public class UserController {
 
@@ -23,9 +25,10 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+//    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<List<UserRepresentation>> getAllUser() {
         List<UserRepresentation> allUser = userService.getAll();
+        log.info("allUser" + allUser);
         return ResponseEntity.ok().body(allUser);
     }
 

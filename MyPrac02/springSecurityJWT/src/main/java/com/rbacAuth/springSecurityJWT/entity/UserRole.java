@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -26,6 +23,26 @@ public class UserRole {
 
     private long roleId;
 
+//    @ManyToOne
+//    @JoinColumn
+//    private User user;
+//
+//    @ManyToOne
+//    @JoinColumn
+//    private Role role;
+//
+//    public UserRole(User user, Role role) {
+//        this.user = user;
+//        this.role = role;
+//    }
+//
+//    public UserRole(long userId, long roleId, User user, Role role) {
+//        this.userId = userId;
+//        this.roleId = roleId;
+//        this.user = user;
+//        this.role = role;
+//    }
+//
     public UserRole(long userId, long roleId) {
         this.userId = userId;
         this.roleId = roleId;
