@@ -5,11 +5,14 @@ import com.authsys.SpringSecurity.entity.User;
 import com.authsys.SpringSecurity.entity.UserRole;
 import com.authsys.SpringSecurity.enums.RoleType;
 import com.authsys.SpringSecurity.model.UserRegisterRequest;
+import com.authsys.SpringSecurity.model.UserRepresentation;
 import com.authsys.SpringSecurity.repository.RoleRepository;
 import com.authsys.SpringSecurity.repository.UserRepository;
 import com.authsys.SpringSecurity.repository.UserRoleRepository;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +58,11 @@ public class UserService {
     public boolean check(String currentPassword, String password) {
         return currentPassword.equals(password);
     }
+
+    public Page<UserRepresentation> getAll(int pageNum, int pageSize) {
+        return userRepository.findAll(PageRequest.of(pageNum, pageSize)).map(User::toUserRepresentation);
+    }
+
 
 
 

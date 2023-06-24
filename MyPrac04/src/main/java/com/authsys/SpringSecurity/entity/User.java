@@ -1,5 +1,6 @@
 package com.authsys.SpringSecurity.entity;
 
+import com.authsys.SpringSecurity.model.UserRepresentation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,5 +49,9 @@ public class User {
         return authorities;
     }
 
-    // TODO: toUserRepresentation()
+    public UserRepresentation toUserRepresentation() {
+        return UserRepresentation.builder().fullName(this.fullName)
+                .userName(this.userName).build();
+    }
+
 }
