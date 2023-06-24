@@ -1,6 +1,6 @@
 package com.rbacAuth.springSecurityJWT.controller;
 
-import com.rbacAuth.springSecurityJWT.constant.SecurityConstants;
+import com.rbacAuth.springSecurityJWT.asecurity.constant.SecurityConstants;
 import com.rbacAuth.springSecurityJWT.dto.UserLoginRequest;
 import com.rbacAuth.springSecurityJWT.service.AuthService;
 import lombok.extern.log4j.Log4j2;

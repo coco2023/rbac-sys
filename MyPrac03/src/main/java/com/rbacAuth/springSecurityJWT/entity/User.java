@@ -1,6 +1,7 @@
 package com.rbacAuth.springSecurityJWT.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rbacAuth.springSecurityJWT.dto.UserRepresentation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +49,13 @@ public class User {
         );
 
         return authorities;
+    }
+
+    public UserRepresentation toUserRepresentation() {
+        return UserRepresentation.builder()
+                .userName(getUserName())
+                .time(new Date())
+                .build();
     }
 
 }

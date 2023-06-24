@@ -1,6 +1,7 @@
 package com.rbacAuth.springSecurityJWT.service.impl;
 
 import com.rbacAuth.springSecurityJWT.dto.UserRegisterRequest;
+import com.rbacAuth.springSecurityJWT.dto.UserRepresentation;
 import com.rbacAuth.springSecurityJWT.entity.Role;
 import com.rbacAuth.springSecurityJWT.entity.User;
 import com.rbacAuth.springSecurityJWT.entity.UserRole;
@@ -11,6 +12,8 @@ import com.rbacAuth.springSecurityJWT.repository.UserRoleRepository;
 import com.rbacAuth.springSecurityJWT.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,7 +36,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAllUser() {
-
         return userRepository.findAll();
     }
 
@@ -59,6 +61,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findByUserName(String userName) {
         return userRepository.findByUserName(userName);
+    }
+
+    @Override
+    public Page<UserRepresentation> getAll(int pageNum, int pageSize) {
+        Page<UserRepresentation> allUsers = userRepository.findAll(PageRequest.of(pageNum, pageSize))
+                .map(User::toUserRepresentation);
+        log.info("get all users");
+        return allUsers;
+
     }
 
     private void checkUserRegisterInfo(UserRegisterRequest userRegisterRequest) {
