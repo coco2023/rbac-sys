@@ -1,5 +1,6 @@
 package com.authsys.SpringSecurity.service;
 
+import com.authsys.SpringSecurity.common.util.CurrentUserUtils;
 import com.authsys.SpringSecurity.common.util.JwtTokenUtils;
 import com.authsys.SpringSecurity.entity.JwtUser;
 import com.authsys.SpringSecurity.entity.User;
@@ -25,6 +26,9 @@ public class AuthService {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    @Autowired
+    private CurrentUserUtils currentUserUtils;
+
     public String createToken(LoginRequest loginRequest) {
         User user = userService.find(loginRequest.getUserName());
 
@@ -47,5 +51,9 @@ public class AuthService {
         stringRedisTemplate.opsForValue().set(user.getId().toString(), token);
 
         return token;
+    }
+
+    public void removeToken() {
+        stringRedisTemplate.delete(currentUserUtils.getCurrentUser().getId().toString());
     }
 }

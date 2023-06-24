@@ -5,6 +5,7 @@ import com.authsys.SpringSecurity.model.LoginRequest;
 import com.authsys.SpringSecurity.service.AuthService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
+@Log4j2
 
 public class AuthController {
 
@@ -30,5 +32,13 @@ public class AuthController {
         httpHeaders.set(SecurityConstants.TOKEN_HEADER, token);
         return new ResponseEntity<>(httpHeaders, HttpStatus.OK);
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout() {
+        authService.removeToken();
+        log.info("Successfully Logout!");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 }
