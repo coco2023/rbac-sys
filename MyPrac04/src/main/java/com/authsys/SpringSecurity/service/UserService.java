@@ -6,6 +6,7 @@ import com.authsys.SpringSecurity.entity.UserRole;
 import com.authsys.SpringSecurity.enums.RoleType;
 import com.authsys.SpringSecurity.model.UserRegisterRequest;
 import com.authsys.SpringSecurity.model.UserRepresentation;
+import com.authsys.SpringSecurity.model.UserUpdateRequest;
 import com.authsys.SpringSecurity.repository.RoleRepository;
 import com.authsys.SpringSecurity.repository.UserRepository;
 import com.authsys.SpringSecurity.repository.UserRoleRepository;
@@ -15,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -64,6 +67,18 @@ public class UserService {
     }
 
 
+    public void update(UserUpdateRequest userUpdateRequest) {
+        User user = find(userUpdateRequest.getUserName());
 
-
+        if (Objects.nonNull(userUpdateRequest.getFullName())) {
+            user.setFullName(userUpdateRequest.getFullName());
+        }
+        if (Objects.nonNull(userUpdateRequest.getPassword())) {
+            user.setPassword(userUpdateRequest.getPassword());
+        }
+        if (Objects.nonNull(userUpdateRequest.getEnabled())) {
+            user.setEnabled(userUpdateRequest.getEnabled());
+        }
+        userRepository.save(user);
+    }
 }

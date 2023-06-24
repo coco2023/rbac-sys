@@ -2,6 +2,7 @@ package com.authsys.SpringSecurity.controller;
 
 import com.authsys.SpringSecurity.model.UserRegisterRequest;
 import com.authsys.SpringSecurity.model.UserRepresentation;
+import com.authsys.SpringSecurity.model.UserUpdateRequest;
 import com.authsys.SpringSecurity.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,13 @@ public class UserController {
     public ResponseEntity<Page<UserRepresentation>> getAllUser(@RequestParam(value = "pageNum", defaultValue = "0") int pageNum, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
         Page<UserRepresentation> allUser = userService.getAll(pageNum, pageSize);
         return ResponseEntity.ok().body(allUser);
+    }
+
+    @PutMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    public ResponseEntity<Void> update(@RequestBody @Valid UserUpdateRequest userUpdateRequest) {
+        userService.update(userUpdateRequest);
+        return ResponseEntity.ok().build();
     }
 
 }
