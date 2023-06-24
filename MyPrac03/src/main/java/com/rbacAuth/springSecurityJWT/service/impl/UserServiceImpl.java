@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -53,6 +54,11 @@ public class UserServiceImpl implements UserService {
         UserRole userRole = new UserRole(user, role);
         userRoleRepository.save(userRole);
 
+    }
+
+    @Override
+    public Optional<User> findByUserName(String userName) {
+        return userRepository.findByUserName(userName);
     }
 
     private void checkUserRegisterInfo(UserRegisterRequest userRegisterRequest) {

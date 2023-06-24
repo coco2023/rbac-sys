@@ -1,6 +1,7 @@
 package com.rbacAuth.springSecurityJWT.config;
 
 import com.rbacAuth.springSecurityJWT.constant.SecurityConstants;
+import com.rbacAuth.springSecurityJWT.filter.JwtAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpMethod;
@@ -29,9 +30,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // allow all the ports
                 .antMatchers(HttpMethod.POST, SecurityConstants.SYSTEM_WHITELIST).permitAll()
 //                .anyRequest().permitAll()
-//                .anyRequest().authenticated()
+                .anyRequest().authenticated()
 
                 .and()
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), stringRedisTemplate))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     }
