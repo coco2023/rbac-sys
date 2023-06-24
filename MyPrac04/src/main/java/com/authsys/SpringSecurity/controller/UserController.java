@@ -43,4 +43,12 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+    public ResponseEntity<Void> deleteUserByUserName(@RequestParam("username") String username) {
+        userService.delete(username);
+        return ResponseEntity.ok().build();
+    }
+
+
 }

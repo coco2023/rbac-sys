@@ -81,4 +81,11 @@ public class UserService {
         }
         userRepository.save(user);
     }
+
+    public void delete(String userName) {
+        if (!userRepository.existsByUserName(userName)) {
+            throw new RuntimeException("USER_NAME_NOT_FOUND");
+        }
+        userRepository.deleteByUserName(userName);
+    }
 }
