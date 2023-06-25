@@ -42,16 +42,23 @@ public class User {
     @JsonIgnore
     private List<UserRole> userRoles = new ArrayList<>();
 
-    public List<SimpleGrantedAuthority> getRoles() {
-        List<Role> roles = userRoles.stream().map(UserRole::getRole).collect(Collectors.toList());
+    public List<SimpleGrantedAuthority> getAuthorities() {
+        List<Role> roles = getRoles();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         roles.forEach(role -> authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName())));
         return authorities;
     }
 
+    private List<Role> getRoles() {
+        return userRoles.stream().map(UserRole::getRole).collect(Collectors.toList());
+    }
+
     public UserRepresentation toUserRepresentation() {
-        return UserRepresentation.builder().fullName(this.fullName)
-                .userName(this.userName).build();
+        return UserRepresentation.builder()
+                .fullName(this.fullName)
+                .userName(this.userName)
+                .role(getRoles())
+                .build();
     }
 
 }

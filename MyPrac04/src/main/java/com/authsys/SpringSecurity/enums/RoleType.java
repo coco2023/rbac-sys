@@ -7,9 +7,18 @@ import lombok.Getter;
 public enum RoleType {
 
     USER("USER", "system users"),
-    TEMP_USER("TEMP_USER", "temp users"),
+
+    TESTER("TESTER", "sys testers"),
+
     MANAGER("MANAGER", "managers"),
-    ADMIN("ADMIN", "Admin");
+
+    ADMIN("ADMIN", "Admin"),
+
+    CUSTOMER("CUSTOMER", "customer"),
+
+    SUPPLIER("SUPPLIER", "supplier");
+
+
     private final String name;
     private final String description;
 

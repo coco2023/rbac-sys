@@ -4,7 +4,6 @@ import com.authsys.SpringSecurity.common.constant.SecurityConstants;
 import com.authsys.SpringSecurity.model.LoginRequest;
 import com.authsys.SpringSecurity.service.AuthService;
 import io.swagger.annotations.ApiOperation;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -16,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/v1/auth")
 @Log4j2
 
-public class AuthController {
+public class AuthLoginController {
 
     @Autowired
     private AuthService authService;

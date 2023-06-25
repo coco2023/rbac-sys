@@ -32,6 +32,17 @@ public class UserService {
     private UserRoleRepository userRoleRepository;
 
     @Transactional(rollbackFor = Exception.class)
+    public void saveUserByRole(UserRegisterRequest userRegisterRequest, String roleType) {
+        ensureUserNameNotExist(userRegisterRequest.getUserName());
+        User user = userRegisterRequest.toUser();
+
+        userRepository.save(user);
+
+        Role role = roleRepository.findByName(roleType).orElseThrow(() -> new RuntimeException("Role_NOT_FOUND"));
+        userRoleRepository.save(new UserRole(user, role));
+    }
+
+    @Transactional(rollbackFor = Exception.class)
     public void save(UserRegisterRequest userRegisterRequest) {
 
         ensureUserNameNotExist(userRegisterRequest.getUserName());
