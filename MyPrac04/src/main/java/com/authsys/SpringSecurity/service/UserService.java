@@ -4,6 +4,8 @@ import com.authsys.SpringSecurity.entity.Role;
 import com.authsys.SpringSecurity.entity.User;
 import com.authsys.SpringSecurity.entity.UserRole;
 import com.authsys.SpringSecurity.enums.RoleType;
+import com.authsys.SpringSecurity.external.ProductFeignService;
+import com.authsys.SpringSecurity.external.response.ProductResponse;
 import com.authsys.SpringSecurity.model.UserRegisterRequest;
 import com.authsys.SpringSecurity.model.UserRepresentation;
 import com.authsys.SpringSecurity.model.UserUpdateRequest;
@@ -17,6 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -30,6 +33,9 @@ public class UserService {
 
     @Autowired
     private UserRoleRepository userRoleRepository;
+
+    @Autowired
+    private ProductFeignService productFeignService;
 
     @Transactional(rollbackFor = Exception.class)
     public void saveUserByRole(UserRegisterRequest userRegisterRequest, String roleType) {
@@ -98,5 +104,10 @@ public class UserService {
             throw new RuntimeException("USER_NAME_NOT_FOUND");
         }
         userRepository.deleteByUserName(userName);
+    }
+
+    public List<ProductResponse> getAllProduct() {
+        List<ProductResponse> allProducts = productFeignService.getAllProduct().getBody();
+        return allProducts;
     }
 }

@@ -1,4 +1,4 @@
-package com.authsys.SpringSecurity.model;
+package com.microprac.productservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,13 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 
-public class LoginRequest {
+public class ErrorResponse {
 
-    private String userName;
+    private String errorMessage;
 
-    private String password;
-
-    private Boolean rememberMe;
-
+    private String errorCode;
 
 }

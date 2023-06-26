@@ -21,6 +21,8 @@ server:
 spring:
   thymeleaf:
     cache: false
+  application:
+    name: USER-SERVICE
   datasource:
     url: jdbc:mysql://localhost:3306/testdb3
     username: root
