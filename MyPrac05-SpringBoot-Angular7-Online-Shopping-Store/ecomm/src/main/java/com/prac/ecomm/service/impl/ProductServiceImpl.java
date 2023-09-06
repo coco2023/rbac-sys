@@ -55,4 +55,9 @@ public class ProductServiceImpl implements ProductService {
         return productInfoRepository.findAllByOrderByProductId(pageable);
     }
 
+    @Override
+    public Page<ProductInfo> findAllInCategory(Integer categoryType, Pageable pageable) {
+        return productInfoRepository.findAllByCategoryTypeOrderByProductIdAsc(categoryType, pageable);
+    }
+
 }

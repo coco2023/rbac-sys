@@ -16,4 +16,7 @@ public interface ProductService {
     void delete(String productId);
 
     Page<ProductInfo> findAll(Pageable pageable);
+
+    Page<ProductInfo> findAllInCategory(Integer categoryType, Pageable pageable);
+
 }

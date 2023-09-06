@@ -11,4 +11,7 @@ public interface ProductInfoRepository extends JpaRepository<ProductInfo, String
     ProductInfo findByProductId(String productId);
 
     Page<ProductInfo> findAllByOrderByProductId(Pageable pageable);
+
+    Page<ProductInfo> findAllByCategoryTypeOrderByProductIdAsc(Integer categoryType, Pageable pageable);
+
 }
