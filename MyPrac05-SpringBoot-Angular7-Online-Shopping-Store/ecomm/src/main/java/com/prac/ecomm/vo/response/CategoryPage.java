@@ -1,7 +1,6 @@
 package com.prac.ecomm.vo.response;
 
 import com.prac.ecomm.entity.ProductInfo;
-import jakarta.persistence.Entity;
 import lombok.*;
 import org.springframework.data.domain.Page;
 

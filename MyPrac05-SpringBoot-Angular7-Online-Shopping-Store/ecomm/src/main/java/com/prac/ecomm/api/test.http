@@ -1,0 +1,20 @@
+POST http://localhost:9002/api/login
+Content-Type: application/json
+
+{
+  "username": "user1@gmail.com",
+  "password": "12345",
+  "rem": true
+}
+###
+POST {{host-url}}/register
+Content-Type: application/json
+
+{
+  "email": "user1@gmail.com",
+  "password": "12345",
+  "name": "userTest",
+  "phone": "12345",
+  "address": "address",
+  "active": true
+}

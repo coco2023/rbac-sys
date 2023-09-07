@@ -1,10 +1,10 @@
 package com.prac.ecomm.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,6 +18,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class User {
     private static final long serialVersionUID = 4887904943282174032L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
