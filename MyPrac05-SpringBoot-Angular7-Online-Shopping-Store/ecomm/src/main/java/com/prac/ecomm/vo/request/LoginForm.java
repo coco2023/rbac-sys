@@ -6,9 +6,6 @@ import javax.validation.constraints.NotBlank;
 
 @Data
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class LoginForm {
 
     @NotBlank

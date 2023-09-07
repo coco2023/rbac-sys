@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,6 +24,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableWebSecurity
+@DependsOn("passwordEncoder")
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
@@ -33,6 +35,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     @Qualifier("dataSource")
     DataSource dataSource;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Value("${spring.queries.users-query}")
     private String usersQuery;
@@ -46,7 +51,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
                 .jdbcAuthentication()
                 .usersByUsernameQuery(usersQuery)
                 .authoritiesByUsernameQuery(rolesQuery)
-                .dataSource(dataSource);
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder);
     }
 
     @Bean

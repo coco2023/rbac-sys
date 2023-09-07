@@ -11,7 +11,6 @@ import java.util.Set;
 
 @Entity
 @Data
-@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,6 +34,14 @@ public class Cart {
 
     public Cart(User user) {
         this.user  = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "cartId=" + cartId +
+                ", products=" + products +
+                '}';
     }
 
 }

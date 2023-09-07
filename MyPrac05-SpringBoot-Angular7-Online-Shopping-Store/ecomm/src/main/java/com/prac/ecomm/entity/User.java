@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 @Entity
 @Data
 @Table(name = "users")
-@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -49,5 +48,19 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore  // fix bi-direction toString() recursion problem
     private Cart cart;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", active=" + active +
+                ", role='" + role + '\'' +
+                '}';
+    }
 
 }

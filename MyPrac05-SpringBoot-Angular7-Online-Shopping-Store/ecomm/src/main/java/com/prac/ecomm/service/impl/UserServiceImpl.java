@@ -8,15 +8,21 @@ import com.prac.ecomm.repository.CartRepository;
 import com.prac.ecomm.repository.UserRepository;
 import com.prac.ecomm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@DependsOn("passwordEncoder")
 public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
     @Autowired
     CartRepository cartRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User findOne(String email) {
@@ -26,6 +32,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         //register
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         try {
             User savedUser = userRepository.save(user);
 
