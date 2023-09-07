@@ -20,4 +20,6 @@ public interface ProductService {
     Page<ProductInfo> findAllInCategory(Integer categoryType, Pageable pageable);
 
     void decreaseStock(String productId, int amount);
+
+    void increaseStock(String productId, int amount);
 }

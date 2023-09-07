@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -68,6 +69,17 @@ public class ProductServiceImpl implements ProductService {
         int update = productInfo.getProductStock() - amount;
         if(update <= 0) throw new MyException(ResultEnum.PRODUCT_NOT_ENOUGH );
 
+        productInfo.setProductStock(update);
+        productInfoRepository.save(productInfo);
+    }
+
+    @Override
+    @Transactional
+    public void increaseStock(String productId, int amount) {
+        ProductInfo productInfo = findOne(productId);
+        if (productInfo == null) throw new MyException(ResultEnum.PRODUCT_NOT_EXIST);
+
+        int update = productInfo.getProductStock() + amount;
         productInfo.setProductStock(update);
         productInfoRepository.save(productInfo);
     }

@@ -1,3 +1,4 @@
+### login
 POST {{host-url}}/login
 Content-Type: application/json
 
@@ -6,7 +7,8 @@ Content-Type: application/json
   "password": "123",
   "rem": true
 }
-###
+
+### register
 POST {{host-url}}/register
 Content-Type: application/json
 
@@ -49,3 +51,15 @@ Authorization: Bearer {{token}}
   "productId": "B0002"
 }
 
+### cart checkout
+POST {{host-url}}/cart/checkout
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### get order by id
+GET {{host-url}}/order/2147483643
+Authorization: Bearer {{token}}
+
+### finish order
+GET {{host-url}}/order/finish/2147483643
+Authorization: Bearer {{token}}

@@ -19,9 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.sql.DataSource;
 
-/**
- * Created By Zhu Lin on 1/1/2019.
- */
 @Configuration
 @EnableWebSecurity
 @DependsOn("passwordEncoder")
