@@ -2,8 +2,8 @@ POST {{host-url}}/login
 Content-Type: application/json
 
 {
-  "username": "user1@gmail.com",
-  "password": "12345",
+  "username": "customer1@email.com",
+  "password": "123",
   "rem": true
 }
 ###
@@ -18,3 +18,34 @@ Content-Type: application/json
   "address": "address",
   "active": true
 }
+
+### get user's cart
+GET {{host-url}}/cart
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
+POST {{host-url}}/cart
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+[
+]
+
+###
+PUT {{host-url}}/cart/B0002
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+3
+
+### add user's cart
+POST {{host-url}}/cart/add
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "quantity": 1,
+  "productId": "B0002"
+}
+

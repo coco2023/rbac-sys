@@ -60,4 +60,16 @@ public class ProductServiceImpl implements ProductService {
         return productInfoRepository.findAllByCategoryTypeOrderByProductIdAsc(categoryType, pageable);
     }
 
+    @Override
+    public void decreaseStock(String productId, int amount) {
+        ProductInfo productInfo = findOne(productId);
+        if (productInfo == null) throw new MyException(ResultEnum.PRODUCT_NOT_EXIST);
+
+        int update = productInfo.getProductStock() - amount;
+        if(update <= 0) throw new MyException(ResultEnum.PRODUCT_NOT_ENOUGH );
+
+        productInfo.setProductStock(update);
+        productInfoRepository.save(productInfo);
+    }
+
 }
