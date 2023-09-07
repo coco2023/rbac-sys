@@ -3,7 +3,7 @@ POST {{host-url}}/login
 Content-Type: application/json
 
 {
-  "username": "employee1@email.com",
+  "username": "manager1@email.com",
   "password": "123",
   "rem": true
 }
@@ -62,4 +62,53 @@ Authorization: Bearer {{token}}
 
 ### finish order
 PATCH {{host-url}}/order/finish/2147483641
+Authorization: Bearer {{token}}
+
+
+### get product
+
+GET {{host-url}}/product/B0003
+
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### edit product
+
+PUT {{host-url}}/seller/product/B0002/edit
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "productId": "B0002",
+  "productName": "Spring In Action",
+  "productPrice": 20.00,
+  "productStock": 195,
+  "productDescription": "Learn Spring",
+  "productIcon": "https://images-na.ssl-images-amazon.com/images/I/51gHy16h5TL._SX397_BO1,204,203,200_.jpg",
+  "productStatus": 1,
+  "categoryType": 0,
+  "updateTime": "2019-01-05T03:43:29.047+0000"
+}
+
+### add new product
+
+POST {{host-url}}/seller/product/new
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "productId": "B0022",
+  "productName": "Spring In Action",
+  "productPrice": 20.00,
+  "productStock": 195,
+  "productDescription": "Learn Spring",
+  "productIcon": "https://images-na.ssl-images-amazon.com/images/I/51gHy16h5TL._SX397_BO1,204,203,200_.jpg",
+  "productStatus": 0,
+  "categoryType": 1
+}
+
+### delete product
+
+DELETE {{host-url}}/seller/product/B0003/delete
+Content-Type: application/json
 Authorization: Bearer {{token}}
