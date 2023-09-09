@@ -16,6 +16,7 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 import { PaginationComponent } from './parts/pagination/pagination.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { CardComponent } from './pages/card/card.component';
+import { ProductEditComponent } from './pages/product-edit/product-edit.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { CardComponent } from './pages/card/card.component';
         PaginationComponent,
         CartComponent,
         CardComponent,
+        ProductEditComponent,
 
     ],
     imports: [
