@@ -3,7 +3,7 @@ POST {{host-url}}/login
 Content-Type: application/json
 
 {
-  "username": "manager1@email.com",
+  "username": "user2@email.com",
   "password": "123",
   "rem": true
 }
@@ -13,8 +13,8 @@ POST {{host-url}}/register
 Content-Type: application/json
 
 {
-  "email": "user1@gmail.com",
-  "password": "12345",
+  "email": "user2@gmail.com",
+  "password": "123",
   "name": "userTest3",
   "phone": "12345",
   "address": "address",
@@ -81,7 +81,7 @@ Authorization: Bearer {{token}}
 {
   "productId": "B0002",
   "productName": "Spring In Action",
-  "productPrice": 20.00,
+  "productPrice": 26.00,
   "productStock": 195,
   "productDescription": "Learn Spring",
   "productIcon": "https://images-na.ssl-images-amazon.com/images/I/51gHy16h5TL._SX397_BO1,204,203,200_.jpg",

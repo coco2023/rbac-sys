@@ -1,0 +1,91 @@
+/* styles.css */
+
+/* Import Bootstrap */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+/* Angular specific styles for form validation */
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+}
+
+.ng-touched.ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+}
+
+/* Add padding for better appearance */
+.navbar {
+    padding: 0.5rem 1rem;
+}
+
+/* Logo and brand name alignment */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+}
+
+/* Navigation links spacing */
+.nav-item {
+    margin-left: 10px;
+}
+
+/* Hover effect on navigation links */
+.nav-item:hover {
+    background-color: rgba(255, 255, 255);
+    border-radius: 5px;
+}
+
+/* Shopping cart and order icons styles */
+.fas {
+    margin-right: 5px;
+}
+
+/* Highlight the sign-out button */
+a[routerLink="/login"][queryParams="{logout: true}"] {
+    color: #f00;
+}
+
+/* Add a slight transition for smooth visual effects on hover and other interactions */
+*, *::before, *::after {
+    transition: all 0.3s ease;
+}
+
+/* Spacing and alignment */
+.collapse.navbar-collapse {
+    text-align: center; /* Center links if you want */
+}
+
+.collapse.navbar-collapse .nav-item {
+    margin: 0 10px; /* Add horizontal spacing between links */
+}
+
+/* Default and hover styles for nav links */
+.collapse.navbar-collapse .nav-link {
+    color: white; /* Set default link color to white */
+    transition: color 0.3s ease-in-out; /* Smooth transition for color changes */
+}
+
+.collapse.navbar-collapse .nav-link:hover {
+    color: #d60606fa; /* Slightly darker shade of white for hover effect */
+}
+
+.navbar-nav.ml-auto .nav-item {
+    margin: 0 10px; /* Add horizontal spacing between links */
+}
+
+.navbar-nav.ml-auto .nav-link {
+    color: white; /* Set default link color to white */
+    transition: color 0.3s ease-in-out; /* Smooth transition for color changes */
+}
+
+.navbar-nav.ml-auto .nav-link:hover {
+    color: #f50202; /* Slightly darker shade of white for hover effect */
+}
+
+.navbar-nav.ml-auto .fas {
+    margin-right: 5px; /* Give some space between the icon and text */
+    color: inherit; /* Make sure the icon inherits the color of the parent */
+}
