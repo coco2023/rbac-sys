@@ -11,6 +11,11 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {CookieService} from "ngx-cookie-service";
 import {ErrorInterceptor} from "./_interceptors/error-interceptor.service";
 import {JwtInterceptor} from "./_interceptors/jwt-interceptor.service";
+import { ProductListComponent } from './pages/product-list/product-list.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { PaginationComponent } from './parts/pagination/pagination.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { CardComponent } from './pages/card/card.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +23,11 @@ import {JwtInterceptor} from "./_interceptors/jwt-interceptor.service";
         NavigationComponent,
         LoginComponent,
         SignupComponent,
+        ProductListComponent,
+        ProductDetailComponent,
+        PaginationComponent,
+        CartComponent,
+        CardComponent,
 
     ],
     imports: [
