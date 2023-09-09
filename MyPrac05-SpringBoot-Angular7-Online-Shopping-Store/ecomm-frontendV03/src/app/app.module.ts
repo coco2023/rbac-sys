@@ -17,6 +17,8 @@ import { PaginationComponent } from './parts/pagination/pagination.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { CardComponent } from './pages/card/card.component';
 import { ProductEditComponent } from './pages/product-edit/product-edit.component';
+import { OrderComponent } from './pages/order/order.component';
+import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +32,8 @@ import { ProductEditComponent } from './pages/product-edit/product-edit.componen
         CartComponent,
         CardComponent,
         ProductEditComponent,
+        OrderComponent,
+        OrderDetailComponent,
 
     ],
     imports: [

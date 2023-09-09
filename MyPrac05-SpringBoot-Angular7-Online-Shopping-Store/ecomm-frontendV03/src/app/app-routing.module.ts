@@ -6,8 +6,8 @@ import {SignupComponent} from './pages/signup/signup.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import {CartComponent} from './pages/cart/cart.component';
 import {AuthGuard} from "./_guards/auth.guard";
-// import {OrderComponent} from "./pages/order/order.component";
-// import {OrderDetailComponent} from "./pages/order-detail/order-detail.component";
+import {OrderComponent} from "./pages/order/order.component";
+import {OrderDetailComponent} from "./pages/order-detail/order-detail.component";
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { ProductEditComponent } from './pages/product-edit/product-edit.component';
 // import {UserDetailComponent} from "./pages/user-edit/user-detail.component";
@@ -29,9 +29,12 @@ const routes: Routes = [
 
   {path: 'cart', component: CartComponent},
   {path: 'success', component: SignupComponent},
-  // {path: 'order/:id', component: OrderDetailComponent, canActivate: [AuthGuard]},
-  // {path: 'order', component: OrderComponent, canActivate: [AuthGuard]},
-  {path: 'seller', redirectTo: 'seller/product', pathMatch: 'full'},
+
+  {
+      path: 'seller', 
+      redirectTo: 'seller/product', 
+      pathMatch: 'full'
+  },
   {
       path: 'seller/product',
       component: ProductListComponent,
@@ -50,6 +53,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {roles: [Role.Employee]}
 },
+
+{path: 'order/:id', component: OrderDetailComponent, canActivate: [AuthGuard]},
+{path: 'order', component: OrderComponent, canActivate: [AuthGuard]},
+
 ];
 
 @NgModule({

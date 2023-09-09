@@ -3,7 +3,7 @@ POST {{host-url}}/login
 Content-Type: application/json
 
 {
-  "username": "user2@email.com",
+  "username": "customer1@email.com",
   "password": "123",
   "rem": true
 }
@@ -57,7 +57,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 ### get order by id
-GET {{host-url}}/order/2147483641
+GET {{host-url}}/order/2
 Authorization: Bearer {{token}}
 
 ### finish order
