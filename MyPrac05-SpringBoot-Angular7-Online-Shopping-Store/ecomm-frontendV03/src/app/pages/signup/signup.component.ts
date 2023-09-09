@@ -28,6 +28,7 @@ export class SignupComponent implements OnInit {
   }
   onSubmit() {
     this.userService.signUp(this.user).subscribe(u => {
+      window.alert('Sign Up successful!'); // Popup message here
       this.router.navigate(['/login']);
     },
         e => {});

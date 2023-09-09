@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
                         this.returnUrl = '/seller';
                     }
 
+                    window.alert('Login successful!'); // Popup message here
                     this.router.navigateByUrl(this.returnUrl);
                 } else {
                     this.isLogout = false;
