@@ -1,5 +1,20 @@
 # Learning resources
 
+## 1 Baeldung
+
+### 1.1 Security with Spring Overview
+refer: https://www.baeldung.com/security-spring
+```
+How do I verify the email addresses of new users?
+How do I properly and safely store user credentials?
+What if a user forgets their password?
+What about users changing their own password?
+How strong should passwords be? How can I enforce some sensible defaults in the app so that my users have good, strong passwords?
+What if I have more than one type of user? I need a good way to store roles and privileges.
+What about security questions? Should I even have them?
+How do I do all of this with good localization support? There are a lot of messages involved.
+```
+
 ## rbac database
 
 [1] Çağdaş Cirit and Feza Buzluca. 2009. A UML profile for role-based access control. In Proceedings of the 2nd international conference on Security of information and networks (SIN '09). Association for Computing Machinery, New York, NY, USA, 83–92. https://doi.org/10.1145/1626195.1626217
